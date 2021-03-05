@@ -149,7 +149,7 @@
                 y: -gravity.y * gravity.scale * ball.mass
             })
 
-            if (isClicking && mousePos != undefined) {
+            if (isClicking && mousePos !== undefined) {
                 ball.position.x = mousePos
 
                 if (mousePos > 455)
@@ -167,12 +167,12 @@
             body = bodies[i]
 
             if (body.position.y < 100) {
-                if (body != ball && Math.abs(body.velocity.x) < .2 && Math.abs(body.velocity.y) < .2) {
+                if (body !== ball && Math.abs(body.velocity.x) < .2 && Math.abs(body.velocity.y) < .2) {
                         gameOver()
                     }
             }
             else if (body.position.y < 150) {
-                if (body != ball && Math.abs(body.velocity.x) < .5 && Math.abs(body.velocity.y) < .5) {
+                if (body !== ball && Math.abs(body.velocity.x) < .5 && Math.abs(body.velocity.y) < .5) {
                     isLineEnable = true
                 }
             }
@@ -185,15 +185,15 @@
         e.pairs.forEach((collision) => {
             bodies = [collision.bodyA, collision.bodyB]
 
-            if (bodies[0].size == undefined || bodies[1].size == undefined) return
+            if (bodies[0].size === undefined || bodies[1].size === undefined) return
 
-            if (bodies[0].size == bodies[1].size) {
+            if (bodies[0].size === bodies[1].size) {
                 allBodies = Composite.allBodies(engine.world)
                 if (allBodies.includes(bodies[0]) && allBodies.includes(bodies[1])) {
                     World.remove(engine.world, bodies[0])
                     World.remove(engine.world, bodies[1])
 
-                    World.add(engine.world, newBall((bodies[0].position.x + bodies[1].position.x) / 2, (bodies[0].position.y + bodies[1].position.y) / 2, bodies[0].size == 11 ? 11 : bodies[0].size + 1))
+                    World.add(engine.world, newBall((bodies[0].position.x + bodies[1].position.x) / 2, (bodies[0].position.y + bodies[1].position.y) / 2, bodies[0].size === 11 ? 11 : bodies[0].size + 1))
 
                     score += bodies[0].size
                 }
