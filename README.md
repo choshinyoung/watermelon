@@ -1,6 +1,6 @@
 # 수박게임
 
-## https://watermelon.shinyoung.tech
+## https://watermelon.shinyou.ng
 
 간단하고, 빠르고,  
 쉬운 커스텀이 가능한   
