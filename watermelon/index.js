@@ -196,6 +196,9 @@
                     World.add(engine.world, newBall((bodies[0].position.x + bodies[1].position.x) / 2, (bodies[0].position.y + bodies[1].position.y) / 2, bodies[0].size == 11 ? 11 : bodies[0].size + 1))
 
                     score += bodies[0].size
+
+                    var audio = new Audio('pop.wav')
+                    audio.play()
                 }
             }
         })
