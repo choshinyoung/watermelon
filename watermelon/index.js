@@ -96,7 +96,7 @@
 
             newSize = Math.ceil(Math.random() * 3)
 
-            setTimeout(() => createNewBall(newSize), 1000)
+            setTimeout(() => createNewBall(newSize), 500)
         }
     })
 
@@ -127,7 +127,7 @@
 
             newSize = Math.ceil(Math.random() * 3)
 
-            setTimeout(() => createNewBall(newSize), 1000)
+            setTimeout(() => createNewBall(newSize), 500)
         }
     })
 
