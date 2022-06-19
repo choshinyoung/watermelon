@@ -86,6 +86,7 @@
         if (isGameOver) return
 
         if (ball != null) {
+            ball.createdAt = 0
             ball.collisionFilter = {
                 'group': 0,
                 'category': 1,
@@ -117,6 +118,7 @@
         if (isGameOver || !isMouseOver) return
 
         if (ball != null) {
+            ball.createdAt = 0
             ball.collisionFilter = {
                 'group': 0,
                 'category': 1,
@@ -179,7 +181,10 @@
         }
     })
 
-    Events.on(engine, 'collisionStart', e => {
+    Events.on(engine, 'collisionActive', collisionEvent)
+    Events.on(engine, 'collisionStart', collisionEvent)
+
+    function collisionEvent(e) {
         if (isGameOver) return
 
         e.pairs.forEach((collision) => {
@@ -190,6 +195,10 @@
             if (bodies[0].size == bodies[1].size) {
                 allBodies = Composite.allBodies(engine.world)
                 if (allBodies.includes(bodies[0]) && allBodies.includes(bodies[1])) {
+                    if ((Date.now() - bodies[0].createdAt < 100 || Date.now() - bodies[1].createdAt < 100) && bodies[0].createdAt != 0 && bodies[1].createdAt != 0) {
+                        return
+                    }
+
                     World.remove(engine.world, bodies[0])
                     World.remove(engine.world, bodies[1])
 
@@ -202,7 +211,7 @@
                 }
             }
         })
-    })
+    }
 
     Events.on(render, 'afterRender', () => {
         if (isGameOver) {
@@ -321,8 +330,10 @@
             }
         })
         c.size = size
+        c.createdAt = Date.now()
         c.restitution = .3
         c.friction = .1
+
         return c
     }
 })()
