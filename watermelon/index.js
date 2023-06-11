@@ -1,22 +1,22 @@
 (() => {
-    var Engine = Matter.Engine,
-    Render = Matter.Render,
-    World = Matter.World,
-    Body = Matter.Body,
-    Bodies = Matter.Bodies,
-    Events = Matter.Events,
-    Composite = Matter.Composite
+    const Engine = Matter.Engine,
+        Render = Matter.Render,
+        World = Matter.World,
+        Body = Matter.Body,
+        Bodies = Matter.Bodies,
+        Events = Matter.Events,
+        Composite = Matter.Composite;
 
-    var parent = document.getElementById('game')
-    var canvas = document.getElementById('canvas')
-    var playAgainButton = document.getElementById('playAgainButton')
-    var floor = document.getElementById('floor')
+    const parent = document.getElementById('game');
+    const canvas = document.getElementById('canvas');
+    const playAgainButton = document.getElementById('playAgainButton');
+    const floor = document.getElementById('floor');
 
-    var ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d');
 
-    var engine = Engine.create()
+    const engine = Engine.create();
 
-    var render = Render.create({
+    const render = Render.create({
         canvas: canvas,
         engine: engine,
         options: {
@@ -24,30 +24,30 @@
             height: 720,
             wireframes: false,
         }
-    })
+    });
 
-    var times = []
-    var fps = 100
+    const times = [];
+    let fps = 100;
 
-    var mousePos
-    var isClicking = false
-    var isMouseOver = false
-    var newSize = 1
+    let mousePos;
+    let isClicking = false;
+    let isMouseOver = false;
+    let newSize = 1;
 
-    var isGameOver = false
-    var score = 0
+    let isGameOver = false;
+    let score = 0;
 
-    var isLineEnable = false
+    let isLineEnable = false;
 
-    var background = Bodies.rectangle(240, 360, 480, 720, { isStatic: true, render: { fillStyle: '#fe9'} })
+    const background = Bodies.rectangle(240, 360, 480, 720, {isStatic: true, render: {fillStyle: '#fe9'}});
     background.collisionFilter = {
         'group': 0,
         'category': 1,
         'mask': -2,
     }
-    var ground = Bodies.rectangle(400, 1220, 810, 1000, { isStatic: true, render: { fillStyle: 'transparent'} })
-    var wallLeft = Bodies.rectangle(-50, 500, 100, 1000, { isStatic: true, render: { fillStyle: 'transparent'} })
-    var wallRight = Bodies.rectangle(530, 500, 100, 1000, { isStatic: true, render: { fillStyle: 'transparent'} })
+    const ground = Bodies.rectangle(400, 1220, 810, 1000, {isStatic: true, render: {fillStyle: 'transparent'}});
+    const wallLeft = Bodies.rectangle(-50, 500, 100, 1000, {isStatic: true, render: {fillStyle: 'transparent'}});
+    const wallRight = Bodies.rectangle(530, 500, 100, 1000, {isStatic: true, render: {fillStyle: 'transparent'}});
     World.add(engine.world, [wallLeft, wallRight, ground, background])
 
     Engine.run(engine)
@@ -104,13 +104,13 @@
     addEventListener('mousemove', e => {
         if (isGameOver) return
 
-        var rect = canvas.getBoundingClientRect()
+        const rect = canvas.getBoundingClientRect();
         mousePos = (e.clientX / parent.style.zoom - rect.left)
     })
     addEventListener('touchmove', e => {
         if (isGameOver) return
 
-        var rect = canvas.getBoundingClientRect()
+        const rect = canvas.getBoundingClientRect();
         mousePos = e.touches[0].clientX / parent.style.zoom - rect.left
     })
 
@@ -145,15 +145,15 @@
         if (isGameOver) return
 
         if (ball != null) {
-            var gravity = engine.world.gravity
+            const gravity = engine.world.gravity;
             Body.applyForce(ball, ball.position, {
                 x: -gravity.x * gravity.scale * ball.mass,
                 y: -gravity.y * gravity.scale * ball.mass
             })
-            
-            if (isClicking && mousePos != undefined) {
+
+            if (isClicking && mousePos !== undefined) {
                 ball.position.x = mousePos
-            
+
                 if (mousePos > 455)
                     ball.position.x = 455
                 else if (mousePos < 25)
@@ -164,17 +164,17 @@
         }
 
         isLineEnable = false
-        var bodies = Composite.allBodies(engine.world)
-        for (var i = 4; i < bodies.length; i++) {
+        const bodies = Composite.allBodies(engine.world);
+        for (let i = 4; i < bodies.length; i++) {
             body = bodies[i]
 
             if (body.position.y < 100) {
-                if (body != ball && Math.abs(body.velocity.x) < .2 && Math.abs(body.velocity.y) < .2) {
+                if (body !== ball && Math.abs(body.velocity.x) < .2 && Math.abs(body.velocity.y) < .2) {
                         gameOver()
                     }
             }
             else if (body.position.y < 150) {
-                if (body != ball && Math.abs(body.velocity.x) < .5 && Math.abs(body.velocity.y) < .5) {
+                if (body !== ball && Math.abs(body.velocity.x) < .5 && Math.abs(body.velocity.y) < .5) {
                     isLineEnable = true
                 }
             }
@@ -190,9 +190,9 @@
         e.pairs.forEach((collision) => {
             bodies = [collision.bodyA, collision.bodyB]
 
-            if (bodies[0].size == undefined || bodies[1].size == undefined) return
+            if (bodies[0].size === undefined || bodies[1].size === undefined) return
 
-            if (bodies[0].size == bodies[1].size) {
+            if (bodies[0].size === bodies[1].size) {
                 allBodies = Composite.allBodies(engine.world)
                 if (allBodies.includes(bodies[0]) && allBodies.includes(bodies[1])) {
                     if ((Date.now() - bodies[0].createdAt < 100 || Date.now() - bodies[1].createdAt < 100) && bodies[0].createdAt != 0 && bodies[1].createdAt != 0) {
@@ -202,7 +202,7 @@
                     World.remove(engine.world, bodies[0])
                     World.remove(engine.world, bodies[1])
 
-                    World.add(engine.world, newBall((bodies[0].position.x + bodies[1].position.x) / 2, (bodies[0].position.y + bodies[1].position.y) / 2, bodies[0].size == 11 ? 11 : bodies[0].size + 1))
+                    World.add(engine.world, newBall((bodies[0].position.x + bodies[1].position.x) / 2, (bodies[0].position.y + bodies[1].position.y) / 2, bodies[0].size === 11 ? 11 : bodies[0].size + 1))
 
                     score += bodies[0].size
 
@@ -294,7 +294,7 @@
         while (engine.world.bodies.length > 4) {
             engine.world.bodies.pop()
         }
-        
+
         createNewBall(1)
     }
 
