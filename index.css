@@ -1,0 +1,161 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+
+  background: #141414;
+
+  color: white;
+
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+
+  gap: 10px;
+
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 7fr 1fr;
+}
+
+.item:nth-child(2) {
+  align-self: end;
+}
+
+.item:nth-child(5) {
+  place-self: end center;
+  text-align: center;
+
+  line-height: 10px;
+
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: large;
+}
+
+input,
+button,
+button * {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+#game {
+  line-height: 0px;
+}
+
+#canvas {
+  border-radius: 25px 25px 0 0;
+}
+
+#floor {
+  width: 480px;
+  background: #b37b50;
+
+  border-radius: 0 0 25px 25px;
+}
+
+#overlay {
+  width: 480px;
+  height: 700px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  transform: translateY(80px);
+}
+
+#playAgainButton {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: fit-content;
+  height: 35px;
+  font-size: 20px;
+}
+
+button {
+  border-radius: 10px;
+  color: #fafafa;
+  background: #39af3d;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.container button {
+  width: 225px;
+  height: 50px;
+}
+
+a {
+  color: white;
+}
+
+#links {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-aspect-ratio: 100/149) {
+  body {
+    font-size: xx-large;
+  }
+
+  #game {
+    height: 100%;
+  }
+
+  #canvas {
+    border-radius: 0;
+  }
+
+  #floor {
+    border-radius: 0;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 10fr 1fr 1fr;
+
+    gap: 30px;
+  }
+
+  .item:nth-child(1) {
+    order: 2;
+    text-align: center;
+  }
+
+  .item:nth-child(2) {
+    order: 1;
+  }
+
+  .item:nth-child(5) {
+    order: 3;
+    grid-column: 1;
+  }
+
+  .empty {
+    display: none;
+  }
+
+  #overlay p {
+    font-size: 0.48em;
+  }
+}

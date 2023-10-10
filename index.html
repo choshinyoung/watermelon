@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+
+    <link href="index.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <title>Watermelon</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="watermelon" />
+    <meta property="og:title" content="watermelon" />
+    <meta property="og:description" content="Play Watermelon Game!" />
+    <meta property="og:image" content="assets/img/10.png" />
+    <meta property="og:image:type" content="image/png" />
+
+    <link rel="icon shortcut" href="assets/img/10.png" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="item"></div>
+
+      <div class="item" id="game">
+        <div id="overlay">
+          <button id="playAgainButton" onclick="location.reload()">
+            Play Again
+          </button>
+        </div>
+        <canvas id="canvas"></canvas>
+        <div id="floor"></div>
+      </div>
+
+      <div class="empty"></div>
+      <div class="empty"></div>
+
+      <div class="item" id="footer">
+        <div id="links">
+          <a href="https://shinyou.ng">shinyoung</a>
+          <a href="https://github.com/choshinyoung/watermelon">Github</a>
+        </div>
+
+        <p>Made with ❤️ by choshinyoung</p>
+      </div>
+    </div>
+
+    <script defer src="index.js"></script>
+  </body>
+</html>
